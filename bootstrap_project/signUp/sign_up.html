@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2091b6233c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="sign_up.css">
+</head>
+
+<body>
+
+    <div class="center">
+        <h1>Sign Up</h1>
+        <p>Fill this form to create new account</p>
+        <form id="formk">
+            <div class="txt">
+                <input id="userName" type="text" required name="user_name">
+                <span></span>
+                <label>Username <span style="color: red;">*</span></label>
+            </div>
+            <div class="txt">
+                <input id="pass" type="password" required name="user_password">
+                <span></span>
+                <label>Password <span style="color: red;">*</span></label>
+            </div>
+            <div class="txt">
+                <input id="userMail" type="text" required name="user_mail">
+                <span></span>
+                <label>Mail <span style="color: red;">*</span></label>
+            </div>
+            <div class="txt">
+                <input id="userFullName" type="text" required name="user_full_name">
+                <span></span>
+                <label>Full Name <span style="color: red;">*</span></label>
+            </div>
+            <div class="txt">
+                <input id="userPhone" type="text" required name="user_phone">
+                <span></span>
+                <label>Phone Number <span style="color: red;">*</span></label>
+            </div>
+
+            <button class="btn-dark" type="submit" onclick="log()">Sign Up</button>
+
+            <div class="singUp">
+                Already a member? <a href="../signIn/sign_in.html">Login</a>
+            </div>
+
+
+        </form>
+    </div>
+
+
+
+
+    <!-- Connecting to our FireStore Data Base -->
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCJQJcnq27xQo4wR3I2rki9mWnZUPH6ec8",
+            authDomain: "deal-project-282b8.firebaseapp.com",
+            projectId: "deal-project-282b8",
+            storageBucket: "deal-project-282b8.appspot.com",
+            messagingSenderId: "561524363907",
+            appId: "1:561524363907:web:d6f014d06407c4327801b6",
+            measurementId: "G-KKP3ZE4WY6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="sign_up.js"></script>
+</body>
+
+</html>

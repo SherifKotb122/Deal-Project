@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2091b6233c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="sign_in.css">
+</head>
+
+<body>
+    <div class="alert alert-danger" role="alert" style="text-align: center; display: none;" id="wrong">
+        Username or password is incorrect!
+    </div>
+
+    <div class="center">
+        <h1>Login</h1>
+        <form id="formk">
+            <div class="txt">
+                <input id="user" type="text" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt">
+                <input id="pass" type="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+
+            <div class="password">Forgot Passowrd?</div>
+
+            <button class="btn-dark">Login</button>
+
+            <div class="singUp">
+                Not a member? <a href="../SignUp/sign_up.html">Signup</a>
+            </div>
+
+
+        </form>
+    </div>
+
+    <!-- Connecting to our FireStore Data Base -->
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCJQJcnq27xQo4wR3I2rki9mWnZUPH6ec8",
+            authDomain: "deal-project-282b8.firebaseapp.com",
+            projectId: "deal-project-282b8",
+            storageBucket: "deal-project-282b8.appspot.com",
+            messagingSenderId: "561524363907",
+            appId: "1:561524363907:web:d6f014d06407c4327801b6",
+            measurementId: "G-KKP3ZE4WY6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="sign_in.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<html lang="en">
+
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posting Product</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2091b6233c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="post_product.css">
+
+
+    <!-- nav and footer style sheet -->
+    <link rel="stylesheet" href="../nav_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- nav and footer js file -->
+    <script src="../nav_footer.js"></script>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #3E4658;">
+        <a class="navbar-brand" href="../HomePage/Home.html"><img src="../logo.PNG" style="height: 50px;"
+                alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-5 mr-auto">
+                <li class="nav-item active px-2  ">
+                    <a class="nav-link" href="../dashboard/dashboard.html">
+                        <i class="icon fa fa-user" style="color:white; font-size: xx-large;"></i>
+                    </a>
+                </li>
+                <li class="nav-item px-2 ">
+                    <a class="nav-link" href="../Category/Category.html">
+                        <i class="icon fa fa-shopping-cart " style="color:white; font-size: xx-large;"></i>
+                    </a>
+                </li>
+                <li class="nav-item  px-2 " style="color: white;">
+                    <a class="nav-link" href="../postProduct/post_product.html">
+                        <i class=" icon fa fa-plus-circle pr-1" style="color:white; font-size: xx-large;">
+                        </i>
+                        <p style="display: inline-block; font-size: large;">post a product</p>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="logout" class=" my-4 mr-3 my-lg-0">
+                <a class="nav-link" onclick="signout()">
+                    <i class=" icon fa fa-sign-out pr-1" style="color:white; font-size: xx-large;"></i> </a>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- <h1>Post Your Product</h1> -->
+    <div class="container mt-3" style="background-color: white; border-radius: 1%;">
+        <div class="d-flex justify-content-center">
+            <h1 id="postHeader" style="margin-top:2%">Post Your Product</h1>
+        </div>
+        <!-- Creating our form so that we can post new product -->
+        <!-- We will put the action where we want to go after we post the product >> 'details page' -->
+
+
+        <div class="container">
+
+            <form id="form_id">
+                <div class="row">
+                    <div class="col-md-6" style=" padding-right: 20px;">
+                        <div style="margin-top:5% ;">
+                            <i class="fas fa-user" style="font-size:36px"></i>
+                            <input type="text" name="product_user" readonly id="user_input" style="font-size: 20px;">
+                        </div>
+                        <hr>
+                        <!-- Our product name -->
+                        <div class="txt">
+                            <input type="text" name="product_name" required>
+                            <span></span>
+                            <label style="font-size: 20px;">Product Name</label>
+                        </div>
+
+                        <!-- Category List -->
+                        <div class="txt">
+                            <input list="categ_list" id="cat_list" name="product_category" placeholder="Category"
+                                required>
+
+                            <datalist id="categ_list">
+                                <option value="Car"></option>
+                                <option value="Clothes"></option>
+                                <option value="Animals"></option>
+                                <option value="Electronics"></option>
+                                <option value="Furniture"></option>
+                            </datalist>
+                            <span></span>
+                            <label></label>
+                        </div>
+                        <!-- The typ of process -->
+                        <div class="form-group">
+                            <label for="processType" style="font-size: 20px;">Select Your Process</label>
+                            <select class="form-control" name="process_type" multiple id="processType"
+                                style="font-size: 20px;">
+                                <option value="Sell">Sell</option>
+                                <option value="Trade">Rent</option>
+                                <option value="Exchange">Exchange</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding-left: 20px;">
+                        <div class="txt">
+                            <input type="text" name="product_color" required>
+                            <span></span>
+                            <label style="font-size: 20px;">Product Color</label>
+                        </div>
+                        <div class="txt">
+                            <input type="text" name="product_type" required>
+                            <span></span>
+                            <label style="font-size: 20px;">Product Type</label>
+                        </div>
+
+                        <!-- Price of the product -->
+                        <div class="txt">
+                            <input type="text" name="product_price" required>
+                            <span></span>
+                            <label style="font-size: 20px;">Price in Egyptian Pound</label>
+                        </div>
+                        <!-- the image url  -->
+                        <div class="txt">
+                            <input type="text" name="product_image" required>
+                            <span></span>
+                            <label style="font-size: 20px;">Insert your Image URL</label>
+                        </div>
+
+                        <!-- The product description -->
+                        <div class="form-group">
+                            <label for="form_tArea" style="font-size: 20px;">Enter your description</label>
+                            <textarea class="form-control" name="product_desc" cols="30" rows="3"
+                                id="form_tArea"></textarea>
+                        </div>
+                        <br>
+
+
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center pb-3 ">
+                    <button class="btn-dark">Submit</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <ul id="try_list">
+
+    </ul>
+
+    <!-- footer -->
+    <footer class="footer row-footer footer-dark py-3" style="background-color:#3E4658;">
+        <div class="container">
+            <div class="row ">
+                <div class="col-4 offset-1 col-sm-2">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">your product</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-7 col-sm-5">
+                    <h5>Our Address</h5>
+                    <address>
+                        cairo -smart village<br>
+
+                        Egypt<br>
+                        <i class="fa fa-phone fa-lg"></i> : +02 1234 5678<br>
+                        <i class="fa fa-fax fa-lg"></i>: 0122233356<br>
+                        <i class="fa fa-envelope fa-lg"></i> : <a
+                            href="mailto:aaaaaaaaaa@gmail.com">confusion@food.net</a>
+                    </address>
+                </div>
+                <div class="col-12 col-sm-4 align-self-center">
+                    <div class="text-center">
+                        <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i
+                                class="fa fa-google-plus fa-lg"></i> </a>
+                        <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i
+                                class="fa fa-facebook fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i
+                                class="fa fa-linkedin fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i
+                                class="fa fa-twitter fa-lg"></i></a>
+                        <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i
+                                class="fa fa-youtube fa-lg"></i></a>
+                        <a class="btn btn-social-icon " href="mailto:"><i class="fa fa-envelope-o fa-lg"></i> </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row  justify-content-center">
+                <div class="col-auto">
+                    <p>© Copyright 2021 Deal</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Connecting to our FireStore Data Base -->
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCJQJcnq27xQo4wR3I2rki9mWnZUPH6ec8",
+            authDomain: "deal-project-282b8.firebaseapp.com",
+            projectId: "deal-project-282b8",
+            storageBucket: "deal-project-282b8.appspot.com",
+            messagingSenderId: "561524363907",
+            appId: "1:561524363907:web:d6f014d06407c4327801b6",
+            measurementId: "G-KKP3ZE4WY6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="post_product.js"></script>
+
+</body>
+
+</html>

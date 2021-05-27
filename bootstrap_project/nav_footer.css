@@ -1,0 +1,25 @@
+/* #3E4658 */
+/* 363f53 */
+*{
+    -webkit-box-sizing: border-box ;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+div ul > li:hover{
+    background-color:#363f53;
+    color: black;
+    }
+
+    #logout:hover{
+        background-color: #363f53;
+        color: black;
+        }
+div ul{
+    height: 50px;
+}
+.icon:hover{
+    color: black;
+}
+li div :hover{
+    display: block;
+}

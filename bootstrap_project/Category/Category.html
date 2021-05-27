@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+
+    <!-- nav and footer style sheet -->
+    <link rel="stylesheet" href="../nav_footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!-- nav and footer js file -->
+      <script src="../nav_footer.js"></script> 
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyCJQJcnq27xQo4wR3I2rki9mWnZUPH6ec8",
+            authDomain: "deal-project-282b8.firebaseapp.com",
+            projectId: "deal-project-282b8",
+            storageBucket: "deal-project-282b8.appspot.com",
+            messagingSenderId: "561524363907",
+            appId: "1:561524363907:web:d6f014d06407c4327801b6",
+            measurementId: "G-KKP3ZE4WY6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+
+    <!-- use defer attribute to make sure the javascript file loads after the body element has loaded -->
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #3E4658;">
+        <a class="navbar-brand" href="../HomePage/Home.html"><img src="../logo.PNG" style="height: 50px;" alt="logo" ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-5 mr-auto">
+                <li class="nav-item active px-2  ">
+                    <a class="nav-link" href="../dashboard/dashboard.html">
+                        <i class="icon fa fa-user" style="color:white; font-size: xx-large;"></i>
+                    </a> 
+                </li>
+                <li class="nav-item px-2 ">
+                    <a class="nav-link" href="../Category/Category.html">
+                        <i class="icon fa fa-shopping-cart " style="color:white; font-size: xx-large;"></i>
+                    </a>
+                </li>
+                <li class="nav-item  px-2 " style="color: white;">
+                    <a class="nav-link" href="../postProduct/post_product.html">
+                        <i class=" icon fa fa-plus-circle pr-1" style="color:white; font-size: xx-large;">
+                        </i> 
+                        <p style="display: inline-block; font-size: large;">post a product</p>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="logout" class=" my-4 mr-3 my-lg-0">
+                    <a class="nav-link" onclick="signout()">      
+                        <i  class=" icon fa fa-sign-out pr-1" style="color:white; font-size: xx-large;"></i>                       </a>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    
+    <section class="container">
+        <fieldset class="p-3 shadow rounded-lg mt-3" style="background-color:white;">
+            <legend style="background-color: rgb(241, 237, 237); width: fit-content; border-radius: 10px; padding: 10px;">Filter</legend>
+            <form action="post">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" id="start_price" placeholder="start price"
+                            name="price">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number" class="form-control" id="end_price" placeholder="end price" name="price">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="color" placeholder="Enter color" name="color">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="type" placeholder="Enter type" name="type">
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div>
+                        <div>Processes: </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="sell" value="sell">Sell
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="rent" value="rent">Rent
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" id="exchange" value="exchange">Exchange
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="btnFind" type="submit" class="btn btn-dark ml-auto mr-4 mt-4">Find</button>
+                </div>
+            </form>
+        </fieldset>
+        <div class="row my-5 justify-content-around" id="product_list">
+
+        </div>
+    </section>
+
+
+            <!-- footer -->
+            <footer  class ="footer row-footer footer-dark py-3" style="background-color:#3E4658;">
+                <div class="container">
+                    <div class="row ">             
+                        <div class ="col-4 offset-1 col-sm-2">
+                            <h5>Links</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">your product</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class ="col-7 col-sm-5">
+                            <h5>Our Address</h5>
+                            <address>
+                              cairo -smart village<br>
+                             
+                              Egypt<br>
+                              <i class="fa fa-phone fa-lg"></i> : +02 1234 5678<br>
+                              <i class="fa fa-fax fa-lg" ></i>: 0122233356<br>
+                              <i class="fa fa-envelope fa-lg"></i> : <a href="mailto:aaaaaaaaaa@gmail.com">confusion@food.net</a>
+                           </address>
+                        </div>
+                        <div  class ="col-12 col-sm-4 align-self-center">
+                            <div class="text-center">
+                                <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i> </a>
+                                <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook fa-lg"></i></a>
+                                <a class="btn btn-social-icon btn-linkedin"href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                                <a class="btn btn-social-icon btn-twitter"href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                                <a class="btn btn-social-icon btn-google"href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                                <a class="btn btn-social-icon "href="mailto:"><i class="fa fa-envelope-o fa-lg"></i> </a>
+                            </div>
+                        </div>
+                   </div>
+                   <div class="row  justify-content-center">              
+                        <div  class ="col-auto">
+                            <p>© Copyright 2021 Deal</p>
+                        </div>
+                   </div>
+    
+                </div>
+            </footer >
+    
+
+
+</body>
+
+</html>

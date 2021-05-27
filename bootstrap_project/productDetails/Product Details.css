@@ -1,0 +1,39 @@
+/* 
+@font-face {
+    font-family: CuteLittleSheep;
+    src: url(Cute\ Little\ Sheep.ttf);
+     } */
+body{
+
+    background-image: url("/Bg.jfif");
+    background-size: 100% 100%;
+}
+.s{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    /* color: rgb(80, 3, 7); */
+    font-size: 23px;
+}
+
+.container{
+    font-family:'Times New Roman', Times, serif;
+    /* color: rgb(129, 6, 12); */
+    font-size: 23px;
+}
+
+#bigContainer{
+    /* background-image: url("/Bg.jfif");
+    background-size: 100% 100%; */
+}
+
+#bodyContainer{
+    /* background-color: rgb(245, 245, 236); */
+    background-color: gainsboro;
+    /* height: 100%; */
+    width: 100%;
+}
+
+#pDetails{
+    width: 100%;
+    height: 100%;
+    text-align: left;
+}

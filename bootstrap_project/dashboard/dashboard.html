@@ -1,0 +1,199 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>user dashboard</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="dashboard.css"> 
+        <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+         
+    </head>
+    </head>
+    <body style="background-color: #f5f7f8;" class="d-inline" >
+        <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #3E4658;">
+        <a class="navbar-brand" href="../HomePage/Home.html"><img src="../logo.PNG" style="height: 50px;" alt="logo" ></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-5 mr-auto">
+                <li class="nav-item active px-2  ">
+                    <a class="nav-link" href="../dashboard/dashboard.html">
+                        <i class="icon fa fa-user" style="color:white; font-size: xx-large;"></i>
+                    </a> 
+                </li>
+                <li class="nav-item px-2 ">
+                    <a class="nav-link" href="../Category/Category.html">
+                        <i class="icon fa fa-shopping-cart " style="color:white; font-size: xx-large;"></i>
+                    </a>
+                </li>
+                <li class="nav-item  px-2 " style="color: white;">
+                    <a class="nav-link" href="../postProduct/post_product.html">
+                        <i class=" icon fa fa-plus-circle pr-1" style="color:white; font-size: xx-large;">
+                        </i> 
+                        <p style="display: inline-block; font-size: large;">post a product</p>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="logout" class=" my-4 mr-3 my-lg-0">
+                    <a class="nav-link" onclick="signout()">      
+                        <i  class=" icon fa fa-sign-out pr-1" style="color:white; font-size: xx-large;"></i>                       </a>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+<!-- page body (profile secsion + product section) -->
+        <div class="container  shadow my-2 pr-0 pl-0" style="background-color:#f5f7f8;">
+            <div class="row">
+                <!-- profile section  -->
+                <div class=" col-md-4 bg-white px-0">
+                    <div class=" card bg-white  shadow ml-0 mr-2 mt-3 px-3 py-3">
+                        <h6 id="user-name" class="text-center"></h3>
+                        <img src="me.jfif" class="align-self-center rounded-circle" style="width: 100px;">
+                        <hr>
+                        <ul style="list-style: none;">
+                            <li id="user-phone" ><i class="fa fa-phone px-2" style="color: #39505c;"></i> </li>
+                            <li id="user-email"><i  class="fa fa-home px-2" style="color: #39505c;"></i></li>
+                            <li ><a href="#"><i class="fa fa-edit px-2" style="color: #39505c;"></i>edit your data </li></a>
+                        </ul>
+                        <br><br>        
+                    </div>  
+                </div>
+                <!-- products section -->
+                <div id="products" class=" col-md-8 bg-white py-3">
+                    <div id="product-card-0" class=" row caed rounded-circle py-3">
+                        <div class="card-header col-md-6 col-12 border-0">
+                            <img id="product-img-0" style="width: 100%;" src="" alt="">
+                        </div>
+                        <div class="card-header col-md-6 col-12 px-1 ">
+                            <h5 id="product-title-0"> </h5>
+                            <ul style="list-style: none;">
+                                <li id="product-description-0" ><i class="fa fa-info px-1" style="color: #39505c;"></i> </li>
+                                <li id="product-color-0"><i class="fa fa-paint-brush px-1" style="color: #39505c;"></i> </li>
+                                <li id="product-price-0"><i class="fa fa-dollar px-1" style="color: #39505c;"></i> </li>
+                                <li id="product-type-0"><i class="fa fa-list-alt px-1" style="color: #39505c;"></i> </li>
+                                <li id="product-category-0"><i class="fa fa-bookmark px-1" style="color: #39505c;"></i> </li>
+                            </ul>   
+                            <br><br> 
+                        </div>
+                        <button type="button" style="background-color: #3E4658; width: 100%;" class=" btn btn-dark " data-toggle="collapse" href="#group1">
+                            <i class="icon fa fa-exchange mx-3 " style="color:white; font-size: larger;"></i>
+                            offers
+                        </button>
+                        <div class="collapse" id="group1">
+                                <div id="offers">
+                                    <div id="offer-card-0" class=" row caed rounded-circle py-3" style="display: none;">
+                                        <div class="card-header col-md-6 col-12 border-0">
+                                        <img id="product-img-0" style="width: 50%;" src="sell.jfif" alt="">
+                                        <p id="product-description-0" ><i class="fa fa-info px-1" style="color: #39505c;"></i> </p>
+                                        <p id="product-type-0"><i class="fa fa-list-alt px-1" style="color: #39505c;"></i> </p>
+                                        </div> 
+                                        <button>Accept</button> 
+                                    </div>
+                                    <div id="" class="d-none row caed rounded-circle py-3">
+                                        <div class="card-header col-md-6 col-12 border-0">
+                                        <img id="" style="width: 50%;" src="sell.jfif" alt="">
+                                        <p id="" ><i class="fa fa-info px-1" style="color: #39505c;"></i> </p>
+                                        <p id=""><i class="fa fa-list-alt px-1" style="color: #39505c;"></i> </p>
+                                        </div> 
+                                        <button>Accept</button> 
+                                    </div>
+                                </div>
+                                
+                        </div>
+                          
+                    </div>
+                </div>
+                            
+            </div>
+            
+        </div>
+        
+        <!-- footer  -->
+        <!-- <footer class="container-fluid" style="color: white; background-color: #4d636f; height: 100px;">
+        footer
+        </footer>
+        <footer class="container-fluid" style="color: white; background-color: #314753; height: 50px;">
+        power by me
+        </footer> -->
+        <!-- footer -->
+        <footer  class ="footer row-footer footer-dark py-3" style="background-color:#3E4658;">
+            <div class="container">
+                <div class="row ">             
+                    <div class ="col-4 offset-1 col-sm-2">
+                        <h5>Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">your product</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class ="col-7 col-sm-5">
+                        <h5>Our Address</h5>
+                        <address>
+                          cairo -smart village<br>
+                         
+                          Egypt<br>
+                          <i class="fa fa-phone fa-lg"></i> : +02 1234 5678<br>
+                          <i class="fa fa-fax fa-lg" ></i>: 0122233356<br>
+                          <i class="fa fa-envelope fa-lg"></i> : <a href="mailto:aaaaaaaaaa@gmail.com">confusion@food.net</a>
+                       </address>
+                    </div>
+                    <div  class ="col-12 col-sm-4 align-self-center">
+                        <div class="text-center">
+                            <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i> </a>
+                            <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-linkedin"href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-twitter"href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                            <a class="btn btn-social-icon btn-google"href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                            <a class="btn btn-social-icon "href="mailto:"><i class="fa fa-envelope-o fa-lg"></i> </a>
+                        </div>
+                    </div>
+               </div>
+               <div class="row  justify-content-center">              
+                    <div  class ="col-auto">
+                        <p>© Copyright 2021 Deal</p>
+                    </div>
+               </div>
+
+            </div>
+        </footer >
+
+        <script>
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            var firebaseConfig = {
+                apiKey: "AIzaSyCJQJcnq27xQo4wR3I2rki9mWnZUPH6ec8",
+                authDomain: "deal-project-282b8.firebaseapp.com",
+                projectId: "deal-project-282b8",
+                storageBucket: "deal-project-282b8.appspot.com",
+                messagingSenderId: "561524363907",
+                appId: "1:561524363907:web:d6f014d06407c4327801b6",
+                measurementId: "G-KKP3ZE4WY6"                    
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            const db_product = firebase.firestore();
+            db_product.settings({ timestampsInSnapshots: true });
+        </script>
+
+        <script src="./dashboard.js"></script>
+
+    </body>
+</html>
